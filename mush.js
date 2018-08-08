@@ -4,28 +4,12 @@ var    canvas = document.getElementsByTagName('canvas')[0],
 defaultHeight = 400,
 
 
-canvas.width = 600;
-canvas.height = 400;
-canvas.style.left = (window.innerWidth - canvas.width)/2+'px';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function init() {
+	canvas.height = defaultHeight;
+	canvas.width = defaultWidth;
+	window.addEventListener('resize', resize);
+	resize();
+}
 
 function resize() {
 	if (window.innerWidth > canvas.width) {
