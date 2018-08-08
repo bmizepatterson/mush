@@ -2,7 +2,26 @@ var    canvas = document.getElementsByTagName('canvas')[0],
 	   	  ctx = canvas.getContext('2d'),
  defaultWidth = 600,
 defaultHeight = 400,
+	   Curves = [];
 
+function Curve(startX, startY, endX, endY) {
+	this.startX = startX;
+	this.startY = startY;
+	this.endX = endX;
+	this.endY = endY;
+	Curves.push(this);
+
+	this.draw = function() {
+		ctx.strokeStyle = getStrokeStyle();
+		ctx.lineWidth = 4;
+		ctx.moveTo(this.startX, this.startY);
+		ctx.lineTo(this.endX, this.endY);
+	}
+}
+
+function getStrokeStyle() {
+	return 'white';
+}
 
 function init() {
 	canvas.height = defaultHeight;
