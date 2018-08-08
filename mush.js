@@ -30,6 +30,9 @@ function init() {
 	canvas.height = defaultHeight;
 	canvas.width = defaultWidth;
 	window.addEventListener('resize', resize);
+	canvas.addEventListener('mousedown', canvasMouseDown);
+	canvas.addEventListener('mousemove', canvasMouseMove);
+	canvas.addEventListener('mouseout', canvasMouseOut);
 	resize();
 	var newCurve = new Curve(10, 30, 300, 300);
 }
@@ -45,6 +48,21 @@ function resize() {
 	} else {
 		canvas.style.top = 0;
 	}
+}
+
+function canvasMouseDown(event) {
+	var x = event.clientX - canvas.offsetLeft + window.pageXOffset;
+	var y = event.clientY - canvas.offsetTop + window.pageYOffset;
+}
+
+function canvasMouseMove(event) {
+	var x = event.clientX - canvas.offsetLeft + window.pageXOffset;
+	var y = event.clientY - canvas.offsetTop + window.pageYOffset;
+	document.getElementsByTagName('P')[0].innerHTML = '(' + x + ', ' + y + ')';	
+}
+
+function canvasMouseOut(event) {
+	document.getElementsByTagName('P')[0].innerHTML = '';
 }
 
 function draw() {
