@@ -43,24 +43,25 @@ function resize() {
 	}
 }
 
+function draw() {
+	for (let i = 0; i < Curves.length; i++) {
+		Curves[i].draw();
+	}
+}
 
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ) {
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function loop() {
+  draw();
+  requestAnimFrame(loop);
+};
 
 init();
+loop();
