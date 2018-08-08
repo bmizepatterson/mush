@@ -13,9 +13,12 @@ function Curve(startX, startY, endX, endY) {
 
 	this.draw = function() {
 		ctx.strokeStyle = getStrokeStyle();
-		ctx.lineWidth = 4;
+		ctx.lineWidth = 2;
+		ctx.beginPath();
 		ctx.moveTo(this.startX, this.startY);
 		ctx.lineTo(this.endX, this.endY);
+		ctx.stroke();
+		ctx.closePath();
 	}
 }
 
@@ -28,6 +31,7 @@ function init() {
 	canvas.width = defaultWidth;
 	window.addEventListener('resize', resize);
 	resize();
+	var newCurve = new Curve(10, 30, 300, 300);
 }
 
 function resize() {
