@@ -3,6 +3,7 @@ var    canvas = document.getElementsByTagName('canvas')[0],
  defaultWidth = 600,
 defaultHeight = 400,
  currentCurve = null,
+ 	   colors = ['#f35d4f','#f36849','#c0d988','#6ddaf1','#f1e85b'],
 	   Curves = [];
 
 function Curve(startX, startY, endX, endY) {
@@ -10,10 +11,11 @@ function Curve(startX, startY, endX, endY) {
 	this.startY = startY;
 	this.endX = endX;
 	this.endY = endY;
+	this.color = colors[ Math.floor(Math.random() * 5) ];
 	Curves.push(this);
 
 	this.draw = function() {
-		ctx.strokeStyle = getStrokeStyle();
+		ctx.strokeStyle = this.color;
 		ctx.lineWidth = 2;
 		ctx.beginPath();
 		ctx.moveTo(this.startX, this.startY);
@@ -23,13 +25,10 @@ function Curve(startX, startY, endX, endY) {
 	}
 }
 
-function getStrokeStyle() {
-	return 'white';
-}
-
 function init() {
 	canvas.height = defaultHeight;
 	canvas.width = defaultWidth;
+	ctx.globalCompositeOperation = 'lighter';
 	window.addEventListener('resize', resize);
 	canvas.addEventListener('mousedown', canvasMouseDown);
 	canvas.addEventListener('mouseup', canvasMouseUp);
