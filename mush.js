@@ -51,18 +51,26 @@ function resize() {
 }
 
 function canvasMouseDown(event) {
-	var x = event.clientX - canvas.offsetLeft + window.pageXOffset;
-	var y = event.clientY - canvas.offsetTop + window.pageYOffset;
+	var x = getMouseX(event.clientX);
+	var y = getMouseY(event.clientY);
 }
 
 function canvasMouseMove(event) {
-	var x = event.clientX - canvas.offsetLeft + window.pageXOffset;
-	var y = event.clientY - canvas.offsetTop + window.pageYOffset;
+	var x = getMouseX(event.clientX);
+	var y = getMouseY(event.clientY);
 	document.getElementsByTagName('P')[0].innerHTML = '(' + x + ', ' + y + ')';	
 }
 
 function canvasMouseOut(event) {
 	document.getElementsByTagName('P')[0].innerHTML = '';
+}
+
+function getMouseX(x) {
+	return x - canvas.offsetLeft + window.pageXOffset - 5;	// Subtract width of canvas border
+}
+
+function getMouseY(y) {
+	return y - canvas.offsetTop + window.pageYOffset - 5;	// Subtract width of canvas border
 }
 
 function draw() {
