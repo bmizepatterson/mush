@@ -2,7 +2,7 @@ var    canvas = document.getElementsByTagName('canvas')[0],
 	   	  ctx = canvas.getContext('2d'),
  defaultWidth = 600,
 defaultHeight = 400,
-curveDrawMode = false,
+ currentCurve = null,
 	   Curves = [];
 
 function Curve(startX, startY, endX, endY) {
@@ -36,7 +36,6 @@ function init() {
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
 	resize();
-	var newCurve = new Curve(10, 30, 300, 300);
 }
 
 function resize() {
@@ -56,23 +55,31 @@ function canvasMouseDown(event) {
 	var x = getMouseX(event.clientX);
 	var y = getMouseY(event.clientY);
 
-	curveDrawMode = true;
+	currentCurve = new Curve(x, y, x, y);
 
 }
 
 function canvasMouseUp(event) {
 	var x = getMouseX(event.clientX);
 	var y = getMouseY(event.clientY);
+
+	currentCurve = null;
 }
 
 function canvasMouseMove(event) {
 	var x = getMouseX(event.clientX);
 	var y = getMouseY(event.clientY);
 	document.getElementsByTagName('P')[0].innerHTML = '(' + x + ', ' + y + ')';	
+
+	if (currentCurve != null) {
+		currentCurve.endX = x;
+		currentCurve.endY = y;
+	}
 }
 
 function canvasMouseOut(event) {
 	document.getElementsByTagName('P')[0].innerHTML = '';
+	currentCurve = null;
 }
 
 function getMouseX(x) {
