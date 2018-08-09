@@ -2,6 +2,7 @@ var    canvas = document.getElementsByTagName('canvas')[0],
 	   	  ctx = canvas.getContext('2d'),
  defaultWidth = 600,
 defaultHeight = 400,
+curveDrawMode = false,
 	   Curves = [];
 
 function Curve(startX, startY, endX, endY) {
@@ -31,6 +32,7 @@ function init() {
 	canvas.width = defaultWidth;
 	window.addEventListener('resize', resize);
 	canvas.addEventListener('mousedown', canvasMouseDown);
+	canvas.addEventListener('mouseup', canvasMouseUp);
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
 	resize();
@@ -51,6 +53,14 @@ function resize() {
 }
 
 function canvasMouseDown(event) {
+	var x = getMouseX(event.clientX);
+	var y = getMouseY(event.clientY);
+
+	curveDrawMode = true;
+
+}
+
+function canvasMouseUp(event) {
 	var x = getMouseX(event.clientX);
 	var y = getMouseY(event.clientY);
 }
