@@ -80,12 +80,12 @@ function canvasMouseMove(event) {
 }
 
 function canvasMouseOver(event) {
-	document.getElementsByTagName('UL')[0].style.animation = 'slideright 0.5s ease-out forwards';	
+	document.getElementsByTagName('UL')[0].style.left = '-70px';
 }
 
 function canvasMouseOut(event) {
 	document.getElementsByTagName('P')[0].innerHTML = '';
-	document.getElementsByTagName('UL')[0].style.animation = 'slideright 0.5s ease-in reverse forwards';	
+	document.getElementsByTagName('UL')[0].style.left = '5px';
 	currentCurve = null;
 }
 
