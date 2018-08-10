@@ -83,11 +83,11 @@ function canvasMouseOut(event) {
 }
 
 function getMouseX(x) {
-	return x - canvas.offsetLeft + window.pageXOffset - 5;	// Subtract width of canvas border
+	return x - wrapper.offsetLeft + window.pageXOffset;	// Subtract width of canvas border
 }
 
 function getMouseY(y) {
-	return y - canvas.offsetTop + window.pageYOffset - 5;	// Subtract width of canvas border
+	return y - wrapper.offsetTop + window.pageYOffset;	// Subtract width of canvas border
 }
 
 function draw() {
