@@ -1,4 +1,5 @@
 var    canvas = document.getElementsByTagName('canvas')[0],
+	  wrapper = canvas.parentElement,
 	   	  ctx = canvas.getContext('2d'),
  defaultWidth = 600,
 defaultHeight = 400,
@@ -39,14 +40,14 @@ function init() {
 
 function resize() {
 	if (window.innerWidth > canvas.width) {
-		canvas.style.left = (window.innerWidth - canvas.width)/2+'px';
+		wrapper.style.left = (window.innerWidth - canvas.width)/2+'px';
 	} else {
-		canvas.style.left = 0;
+		wrapper.style.left = 0;
 	}
 	if (window.innerHeight > canvas.height) {
-		canvas.style.top = (window.innerHeight - canvas.height)/2+'px';
+		wrapper.style.top = (window.innerHeight - canvas.height)/2+'px';
 	} else {
-		canvas.style.top = 0;
+		wrapper.style.top = 0;
 	}
 }
 
