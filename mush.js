@@ -35,6 +35,7 @@ function init() {
 	canvas.addEventListener('mouseup', canvasMouseUp);
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
+	canvas.addEventListener('mouseover', canvasMouseOver);
 	document.getElementById('clear').addEventListener('click', clear);
 	resize();
 }
@@ -78,8 +79,13 @@ function canvasMouseMove(event) {
 	}
 }
 
+function canvasMouseOver(event) {
+	document.getElementsByTagName('UL')[0].style.animation = 'slideright 0.5s ease-out forwards';	
+}
+
 function canvasMouseOut(event) {
 	document.getElementsByTagName('P')[0].innerHTML = '';
+	document.getElementsByTagName('UL')[0].style.animation = 'slideright 0.5s ease-in reverse forwards';	
 	currentCurve = null;
 }
 
@@ -88,11 +94,11 @@ function clear() {
 }
 
 function getMouseX(x) {
-	return x - wrapper.offsetLeft + window.pageXOffset;	// Subtract width of canvas border
+	return x - wrapper.offsetLeft + window.pageXOffset;
 }
 
 function getMouseY(y) {
-	return y - wrapper.offsetTop + window.pageYOffset;	// Subtract width of canvas border
+	return y - wrapper.offsetTop + window.pageYOffset;
 }
 
 function draw() {
