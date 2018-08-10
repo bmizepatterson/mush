@@ -13,6 +13,7 @@ p {
 	height:1rem;
 }
 ul {
+	font-family:'Unica One', sans-serif;
 	color:white;
 	list-style-type:none;
 	position:absolute;
