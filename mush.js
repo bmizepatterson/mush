@@ -35,6 +35,7 @@ function init() {
 	canvas.addEventListener('mouseup', canvasMouseUp);
 	canvas.addEventListener('mousemove', canvasMouseMove);
 	canvas.addEventListener('mouseout', canvasMouseOut);
+	document.getElementById('clear').addEventListener('click', clear);
 	resize();
 }
 
@@ -80,6 +81,10 @@ function canvasMouseMove(event) {
 function canvasMouseOut(event) {
 	document.getElementsByTagName('P')[0].innerHTML = '';
 	currentCurve = null;
+}
+
+function clear() {
+	Curves = [];
 }
 
 function getMouseX(x) {
