@@ -40,10 +40,31 @@
 		font:inherit;
 		border:none;
 		outline:none;
-		transition: text-shadow 0.5s;
+		/*transition: all 0.5s;*/
 	}
-	button:hover {
-		text-shadow: 1px 1px 4px #fff;
+	button span {
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+	button span:before {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		left: -20px;
+		transition: 0.5s;
+	}
+	button:hover span {
+		/*text-shadow: 1px 1px 4px #fff;*/
+		/*padding-left: 5px;*/
+	}
+	button:hover span:before {
+		opacity: 1;
+		left: -10px;
+	}
+	button:active {
+		transform: translateY(1px);
 	}
 	</style>
 	<title>MUSH</title>
@@ -51,7 +72,7 @@
 <body>
 	<div>
 		<ul>
-			<li><button id="clear">Clear</button></li>
+			<li><button id="clear"><span>Clear</span></button></li>
 		</ul>
 		<canvas></canvas>
 		<p></p>
