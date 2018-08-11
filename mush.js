@@ -15,13 +15,15 @@ function Curve(startX, startY, endX, endY) {
 	this.slope = (endY-startY)/(endX-startX);
 	this.b = this.startY - this.slope * this.startX;
 	this.color = colors[ Math.floor(Math.random() * 5) ];
-	this.startVX = Math.round( Math.random() * 6) - 1.5;
- 	this.startVY = Math.round( Math.random() * 6) - 1.5;
- 	this.endVX = Math.round( Math.random() * 6) - 1.5;
- 	this.endVY = Math.round( Math.random() * 6) - 1.5;
+	this.startVX = Math.round( Math.random() * 3);
+ 	this.startVY = Math.round( Math.random() * 3);
+ 	this.endVX = Math.round( Math.random() * 3);
+ 	this.endVY = Math.round( Math.random() * 3);
  	this.midpointX = Math.round((startX+endX)/2);
  	this.midpointY = Math.round((startY+endY)/2);
+ 	this.length = distance(startX, startY, endX, endY);
  	this.id = Curves.length;
+ 	this.intersections = [];
 	Curves.push(this);
 
 	this.draw = function() {
@@ -33,18 +35,20 @@ function Curve(startX, startY, endX, endY) {
 		ctx.moveTo(this.startX, this.startY);
 		ctx.lineTo(this.endX, this.endY);
 		ctx.stroke();
-		ctx.closePath();
 
 		// Check for intersections
+		var temp = [];
 		for (let i = 0; i < Curves.length; i++) {
-			if (i === this.id) continue;
+			if (i === this.id || Curves[i].intersections.indexOf(this.id) != -1) continue;
 			let result = checkLineIntersection(this.startX, this.startY, this.endX, this.endY, Curves[i].startX, Curves[i].startY, Curves[i].endX, Curves[i].endY);
 			if (result.onLine1 && result.onLine2) {
+				temp.push(i);
 				ctx.beginPath();
-				ctx.arc(result.x, result.y, 5, 0, 2*Math.PI);
+				ctx.arc(result.x, result.y, (this.length+Curves[i].length)/50, 0, 2*Math.PI);
 				ctx.stroke();
 			}
 		}
+		this.intersections = temp;
 
 		this.startX += this.startVX;
 		this.startY += this.startVY;
@@ -54,6 +58,7 @@ function Curve(startX, startY, endX, endY) {
 		this.midpointY = (this.endY+this.startY)/2;
 		this.slope = (this.endY-this.startY)/(this.endX-this.startX);
 		this.b = this.startY - this.slope * this.startX;
+		this.length = distance(this.startX, this.startY, this.endX, this.endY);
 
 		if (this.startX > canvas.width || this.startX < 0) this.startVX = -this.startVX;
 		if (this.endX > canvas.width || this.endX < 0) this.endVX = -this.endVX;
