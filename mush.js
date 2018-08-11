@@ -21,10 +21,6 @@ function Curve(startX, startY, endX, endY) {
  	this.endVY = Math.round( Math.random() * 6) - 1.5;
  	this.midpointX = Math.round((startX+endX)/2);
  	this.midpointY = Math.round((startY+endY)/2);
- 	this.centerX = (this.endX+this.startX)/2;
- 	this.centerVX = 1; //Math.round( Math.random() * 6);
- 	this.centerY = this.slope * this.centerX + this.b;
- 	this.centerDelta = 100;
  	this.id = Curves.length;
 	Curves.push(this);
 
@@ -39,32 +35,10 @@ function Curve(startX, startY, endX, endY) {
 		ctx.stroke();
 		ctx.closePath();
 
-		var length = distance(this.startX, this.startY, this.endX, this.endY);
-		ctx.beginPath();
-		ctx.arc(this.centerX, this.centerY, length/30, 0, 2 * Math.PI);
-		ctx.fillStyle = this.color;
-		ctx.fill();
-		ctx.closePath();		
-		
-		if (Curves.length > this.id+1) {
-			var next = Curves[this.id+1];
-			var radius = distance(this.midpointX, this.midpointY, next.midpointX, next.midpointY)/2;
-			var centerX = (this.midpointX+next.midpointX)/2;
-			var centerY = (this.midpointY+next.midpointY)/2;
-			ctx.beginPath();
-			// ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-			ctx.moveTo(this.endX, this.endY);
-			ctx.lineTo(next.startX, next.startY);
-			ctx.stroke();
-			ctx.closePath();
-		}
-
 		this.startX += this.startVX;
 		this.startY += this.startVY;
 		this.endX += this.endVX;
 		this.endY += this.endVY;
-		this.centerX += this.centerVX;
-		this.centerY = this.evaluate(this.centerX);
 		this.midpointX = (this.endX+this.startX)/2;
 		this.midpointY = (this.endY+this.startY)/2;
 		this.slope = (this.endY-this.startY)/(this.endX-this.startX);
@@ -74,36 +48,6 @@ function Curve(startX, startY, endX, endY) {
 		if (this.endX > canvas.width || this.endX < 0) this.endVX = -this.endVX;
 		if (this.startY > canvas.height || this.startY < 0) this.startVY = -this.startVY;
 		if (this.endY > canvas.height || this.endY < 0) this.endVY = -this.endVY;
-
-		if (this.startX < this.endX) {
-			if (this.centerX > this.endX) {
-				this.centerX = this.endX;
-				this.centerVX = -this.centerVX;
-			}
-			if (this.centerX < this.startX) {
-				this.centerX = this.startX;
-				this.centerVX = -this.centerVX;
-			}
-		} else if (this.endX < this.startX) {
-			if (this.centerX > this.startX) {
-				this.centerX = this.startX;
-				this.centerVX = -this.centerVX;
-			}
-			if (this.centerX < this.endX) {
-				this.centerX = this.endX;
-				this.centerVX = -this.centerVX;
-			}
-		} else if (this.startX === this.endX) {
-			if (this.startY < this.endY) {
-				if (this.centerY > this.endY) this.centerY = this.endY;
-				if (this.centerY < this.startY) this.centerY = this.startY
-			}
-			if (this.endY < this.startY) {
-				if (this.centerY > this.startY) this.centerY = this.startY;
-				if (this.centerY < this.endY) this.centerY = this.endY;
-			}
-			this.centerX = this.startX;
-		}
 
 	}
 
