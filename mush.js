@@ -84,6 +84,7 @@ function init() {
 	canvas.addEventListener('mouseover', canvasMouseOver);
 	document.getElementById('clear').addEventListener('click', clear);
 	document.getElementById('add').addEventListener('click', add);
+	document.getElementById('burst').addEventListener('click', burst);
 	resize();
 }
 
@@ -202,6 +203,12 @@ function add() {
 	var startY = Math.random() * canvas.height;
 	var endY = Math.random() * canvas.height;
 	new Curve(startX, startY, startX+1, startY+1);
+}
+
+function burst() {
+	for (var i = 0; i < 10; i++) {
+		add();
+	}
 }
 
 function distance(x1, y1, x2, y2) {
