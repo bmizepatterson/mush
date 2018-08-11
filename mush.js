@@ -4,6 +4,7 @@ var    canvas = document.getElementsByTagName('canvas')[0],
  defaultWidth = 600,
 defaultHeight = 400,
  currentCurve = null,
+ 	   buffer = 100,
  	   colors = ['#f35d4f','#f36849','#c0d988','#6ddaf1','#f1e85b'],
 	   Curves = [];
 
@@ -60,10 +61,10 @@ function Curve(startX, startY, endX, endY) {
 		this.b = this.startY - this.slope * this.startX;
 		this.length = distance(this.startX, this.startY, this.endX, this.endY);
 
-		if (this.startX > canvas.width || this.startX < 0) this.startVX = -this.startVX;
-		if (this.endX > canvas.width || this.endX < 0) this.endVX = -this.endVX;
-		if (this.startY > canvas.height || this.startY < 0) this.startVY = -this.startVY;
-		if (this.endY > canvas.height || this.endY < 0) this.endVY = -this.endVY;
+		if (this.startX > canvas.width + buffer || this.startX < -buffer) this.startVX = -this.startVX;
+		if (this.endX > canvas.width + buffer || this.endX < -buffer) this.endVX = -this.endVX;
+		if (this.startY > canvas.height + buffer || this.startY < -buffer) this.startVY = -this.startVY;
+		if (this.endY > canvas.height + buffer || this.endY < -buffer) this.endVY = -this.endVY;
 
 	}
 
